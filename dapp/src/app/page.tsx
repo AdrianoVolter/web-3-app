@@ -1,10 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Head from "next/head";
 
 export default function Home() {
+
+  const [message, setMessage] = useState("");
+
   const btnLoginClick = async () => {
-    console.log("clique");
+    setMessage("Conectando com a MetaMask...");
   };
 
   return (
@@ -44,6 +48,9 @@ export default function Home() {
                 Conectar com a MetaMask
               </button>
             </div>
+            <p className="message">
+              {message}
+            </p>
           </div>
         </div>
         <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

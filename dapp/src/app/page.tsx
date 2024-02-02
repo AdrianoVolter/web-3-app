@@ -2,13 +2,18 @@
 
 import { useState } from "react";
 import Head from "next/head";
+import { doLogin } from "@/services/Web3Service";
 
 export default function Home() {
-
   const [message, setMessage] = useState("");
 
   const btnLoginClick = async () => {
-    setMessage("Conectando com a MetaMask...");
+    doLogin()
+      .then((account) => setMessage(account))
+      .catch((err) => {
+        console.error(err);
+        setMessage(err.message);
+      });
   };
 
   return (
@@ -48,21 +53,23 @@ export default function Home() {
                 Conectar com a MetaMask
               </button>
             </div>
-            <p className="message">
-              {message}
-            </p>
+            <p className="message">{message}</p>
           </div>
         </div>
         <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-          <p className="col-md-4 mb-0 text-body-secondary">&copy; 2024 Webbb3, Inc</p>
+          <p className="col-md-4 mb-0 text-body-secondary">
+            &copy; 2024 Webbb3, Inc
+          </p>
           <ul className="nav col-md-4 justify-content-end">
             <li className="nav-item">
               <a href="/" className="nav-link px-2 text-body-secondary">
-                Home</a>
+                Home
+              </a>
             </li>
             <li className="nav-item">
               <a href="/about" className="nav-link px-2 text-body-secondary">
-                About</a>
+                About
+              </a>
             </li>
           </ul>
         </footer>

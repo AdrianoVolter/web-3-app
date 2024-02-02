@@ -3,13 +3,16 @@
 import { useState } from "react";
 import Head from "next/head";
 import { doLogin } from "@/services/Web3Service";
+import { useRouter } from "next/navigation"
 
 export default function Home() {
+
   const [message, setMessage] = useState("");
+  const { push } = useRouter();
 
   const btnLoginClick = async () => {
     doLogin()
-      .then((account) => setMessage(account))
+      .then((account) => push("/vote"))
       .catch((err) => {
         console.error(err);
         setMessage(err.message);

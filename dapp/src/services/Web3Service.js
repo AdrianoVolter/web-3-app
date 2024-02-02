@@ -10,3 +10,11 @@ export async function doLogin() {
     localStorage.setItem('wallet', accounts[0]);
     return accounts[0];
 }
+
+export async function getCurrentVoting(){
+    const wallet = localStorage.getItem('wallet');
+    if(!wallet) throw new Error('Unauthorized');
+
+    const web3 = new Web3(window.ethereum);
+    const contract = new web3.eth.Contract(abi, contractAddress);
+}

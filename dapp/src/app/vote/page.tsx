@@ -25,7 +25,12 @@ export default function Vote() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="container col-xxl-8 py-5">
-       
+       <div className="row align-items-center g-5 py-5">
+       <h1 className="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+              Webbb3
+            </h1>
+            <p className="lead">Votação on-chain do BBB</p>
+       </div>
         <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
           <p className="col-md-4 mb-0 text-body-secondary">
             &copy; 2024 Webbb3, Inc

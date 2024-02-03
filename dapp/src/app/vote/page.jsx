@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { doLogin } from "@/services/Web3Service";
-import { getCurrentVoting } from "@/services/Web3Service";
+import { getCurrentVoting, addVote } from "@/services/Web3Service";
 import { useRouter } from "next/navigation";
 
 export default function Vote() {
@@ -54,13 +54,31 @@ export default function Vote() {
     }
   }
 
-  const btnVote2Click = async () => {
-    console.log("Vote 2");
-  };
+  function btnVote2Click() {
+    setMessage("Conectando na carteira...aguarde...");
+    addVote(2)
+      .then(() => {
+        setShowVotes(2);
+        setMessage("Resultados parciais sujeitos a alteração minuto a minuto.");
+      })
+      .catch((err) => {
+        console.error(err);
+        setMessage(err.message);
+      });
+  }
 
-  const btnVote1Click = async () => {
-    console.log("Vote 1");
-  };
+  function btnVote1Click() {
+    setMessage("Conectando na carteira...aguarde...");
+    addVote(1)
+      .then(() => {
+        setShowVotes(1);
+        setMessage("Resultados parciais sujeitos a alteração minuto a minuto.");
+      })
+      .catch((err) => {
+        console.error(err);
+        setMessage(err.message);
+      });
+  }
 
   return (
     <>
@@ -75,8 +93,10 @@ export default function Vote() {
           <h1 className="display-5 fw-bold text-body-emphasis lh-1 mb-3">
             Webbb3
           </h1>
-          <p className="lead">Votação on-chain do BBB</p>
-          <p>Usuario conectado: {localStorage.getItem("wallet")}</p>
+          <p className="lead text-danger">
+            User: {localStorage.getItem("wallet")}
+          </p>
+          <p className="lead">Votação on-chain do BBB, </p>
           {voting.maxDate > Date.now() / 1000 ? (
             <p className="lead mb-3">
               Você tem até {new Date(Number(voting.maxDate) * 1000).toString()}{" "}

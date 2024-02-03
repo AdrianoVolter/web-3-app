@@ -14,12 +14,21 @@ export async function doLogin() {
     return accounts[0];
 }
 
-export async function getCurrentVoting(){
+function getContract(){
     const wallet = localStorage.getItem('wallet');
     if(!wallet) throw new Error('Unauthorized');
 
     const web3 = new Web3(window.ethereum);
-    const contract = new web3.eth.Contract( ABI, CONTRACT_ADDRAESS, { from: wallet });
+    return new web3.eth.Contract( ABI, CONTRACT_ADDRAESS, { from: wallet });
+}
+
+export async function getCurrentVoting(){
+    const contract = getContract();
     const voting = await contract.methods.getCurrentVoting().call();
     return voting;
+}
+
+export async function addVote(choice) {
+    const contract = getContract();
+    return contract.methods.addVote(choice).send();
 }

@@ -17,6 +17,7 @@ export default function Vote() {
   const [voting, setVoting] = useState({ maxDate: Date.now() });
   const [option1, setOption1] = useState(DEFAULT_OPTION);
   const [option2, setOption2] = useState(DEFAULT_OPTION);
+  const [showVote, setShowVote] = useState(0);
 
   useEffect(() => {
     if (!localStorage.getItem("wallet")) return push("/");
@@ -53,15 +54,9 @@ export default function Vote() {
     }
   }
 
-  const btnLoginClick = async () => {
-    doLogin()
-      .then((account) => setMessage(account))
-      .catch((err) => {
-        console.error(err);
-        setMessage(err.message);
-      });
+  const btnVoteClick = async () => {
+    console.log("Vote 2");
   };
-
   return (
     <>
       <Head>
@@ -100,7 +95,26 @@ export default function Vote() {
               width={250}
               height={250}
             />
-            
+            {showVote > 0 ? (
+              <button
+                className="btn btn-secondary p-3 d-block mx-auto my-2"
+                style={{ width: 250 }}
+                disabled={true}
+              >
+                {showVote === 2
+                  ? Number(voting.votes2) + 1
+                  : Number(voting.votes2)}{" "}
+                votos
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary p-3 d-block mx-auto my-2"
+                style={{ width: 250 }}
+                onClick={btnVoteClick}
+              >
+                Quero que sai esse!
+              </button>
+            )}
           </div>
         </div>
         <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

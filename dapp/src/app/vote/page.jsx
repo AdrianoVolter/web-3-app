@@ -41,7 +41,7 @@ export default function Vote() {
         return {
           name: "Adriano",
           image:
-            "https://cdn.pixabay.com/photo/2015/10/31/11/58/money-1015277_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/03/27/18/30/iphone-1283462_1280.jpg",
         };
       case "Volter":
         return {
@@ -54,9 +54,14 @@ export default function Vote() {
     }
   }
 
-  const btnVoteClick = async () => {
+  const btnVote2Click = async () => {
     console.log("Vote 2");
   };
+
+  const btnVote1Click = async () => {
+    console.log("Vote 1");
+  };
+
   return (
     <>
       <Head>
@@ -71,6 +76,7 @@ export default function Vote() {
             Webbb3
           </h1>
           <p className="lead">Votação on-chain do BBB</p>
+          <p>Usuario conectado: {localStorage.getItem("wallet")}</p>
           {voting.maxDate > Date.now() / 1000 ? (
             <p className="lead mb-3">
               Você tem até {new Date(Number(voting.maxDate) * 1000).toString()}{" "}
@@ -92,10 +98,9 @@ export default function Vote() {
             <img
               src={option2.image}
               className="d-block mx-auto img-fluid rounded"
-              width={250}
-              height={250}
+              style={{ width: 250 }}
             />
-            {showVote > 0 ? (
+            {showVote > 0 || voting.maxDate < Date.now() / 1000 ? (
               <button
                 className="btn btn-secondary p-3 d-block mx-auto my-2"
                 style={{ width: 250 }}
@@ -110,7 +115,37 @@ export default function Vote() {
               <button
                 className="btn btn-primary p-3 d-block mx-auto my-2"
                 style={{ width: 250 }}
-                onClick={btnVoteClick}
+                onClick={btnVote2Click}
+              >
+                Quero que sai esse!
+              </button>
+            )}
+          </div>
+          <div className="col-5">
+            <h3 className="my-2 d-block mx-auto" style={{ width: 250 }}>
+              {voting.option1}
+            </h3>
+            <img
+              src={option1.image}
+              className="d-block mx-auto img-fluid rounded"
+              style={{ width: 250 }}
+            />
+            {showVote > 0 || voting.maxDate < Date.now() / 1000 ? (
+              <button
+                className="btn btn-secondary p-3 d-block mx-auto my-2"
+                style={{ width: 250 }}
+                disabled={true}
+              >
+                {showVote === 1
+                  ? Number(voting.votes1) + 1
+                  : Number(voting.votes1)}{" "}
+                votos
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary p-3 d-block mx-auto my-2"
+                style={{ width: 250 }}
+                onClick={btnVote1Click}
               >
                 Quero que sai esse!
               </button>

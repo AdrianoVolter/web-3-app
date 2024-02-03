@@ -14,7 +14,7 @@ export default function Home() {
       .then((account) => {
         setTimeout(() => {
           push("/vote");
-        }, 2000);
+        }, 1200);
       })
       .catch((err) => {
         console.error(err);

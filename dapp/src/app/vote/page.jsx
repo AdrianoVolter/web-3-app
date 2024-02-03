@@ -8,15 +8,15 @@ import { useRouter } from "next/navigation";
 
 export default function Vote() {
   const { push } = useRouter();
-
-  const [message, setMessage] = useState("");
-  const [voting, setVoting] = useState({ maxDate: Date.now() });
-
   const DEFAULT_OPTION = {
     name: "Loading....",
     image:
       "https://cdn.pixabay.com/photo/2017/10/24/07/12/hacker-2883630_1280.jpg",
   };
+  const [message, setMessage] = useState("");
+  const [voting, setVoting] = useState({ maxDate: Date.now() });
+  const [option1, setOption1] = useState(DEFAULT_OPTION);
+  const [option2, setOption2] = useState(DEFAULT_OPTION);
 
   useEffect(() => {
     if (!localStorage.getItem("wallet")) return push("/");
@@ -25,6 +25,8 @@ export default function Vote() {
         console.log(voting);
         //@ts-ignore
         setVoting(voting);
+        setOption1(getOption(voting.option1));
+        setOption2(getOption(voting.option2));
       })
       .catch((err) => {
         console.error(err);
@@ -92,7 +94,13 @@ export default function Vote() {
             <h3 className="my-2 d-block mx-auto" style={{ width: 250 }}>
               {voting.option2}
             </h3>
-            {/* <img src={we.jpg} className="d-block mx-auto" style={{width:250}} /> */}
+            <img
+              src={option2.image}
+              className="d-block mx-auto img-fluid rounded"
+              width={250}
+              height={250}
+            />
+            
           </div>
         </div>
         <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

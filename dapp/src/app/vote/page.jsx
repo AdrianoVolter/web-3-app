@@ -38,15 +38,15 @@ export default function Vote() {
 
   function getOption(option) {
     switch (option) {
-      case "Adriano":
+      case "Rovenildo Souza":
         return {
-          name: "Adriano",
+          name: "Rovenildo Souza",
           image:
             "https://cdn.pixabay.com/photo/2016/03/27/18/30/iphone-1283462_1280.jpg",
         };
-      case "Volter":
+      case "Jucsara Maral":
         return {
-          name: "Volter",
+          name: "Jucsara Maral",
           image:
             "https://cdn.pixabay.com/photo/2016/12/06/04/17/money-1885540_1280.jpg",
         };
@@ -77,6 +77,7 @@ export default function Vote() {
       })
       .catch((err) => {
         console.error(err);
+        console.log(err);
         setMessage(err.message);
       });
   }

@@ -24,12 +24,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Webbb3 | Login</title>
-        <meta name="description" content="Webbb3" />
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
       <div className="container col-xxl-8 py-5">
         <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
           <div className="col-10 col-sm-8 col-lg-6">
